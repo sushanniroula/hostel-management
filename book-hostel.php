@@ -26,16 +26,16 @@ $gurrelation=$_POST['grelation'];
 $gurcntno=$_POST['gcontact'];
 $caddress=$_POST['address'];
 $ccity=$_POST['city'];
-$cstate=$_POST['state'];
+// $cstate=$_POST['state'];
 $cpincode=$_POST['pincode'];
 $paddress=$_POST['paddress'];
 $pcity=$_POST['pcity'];
-$pstate=$_POST['pstate'];
+// $pstate=$_POST['pstate'];
 $ppincode=$_POST['ppincode'];
-$query="insert into  registration(roomno,seater,feespm,foodstatus,stayfrom,duration,course,regno,firstName,middleName,lastName,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,corresPincode,pmntAddress,pmntCity,pmnatetState,pmntPincode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-$stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('iiiisisissssisississsisssi',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$course,$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$cpincode,$paddress,$pcity,$pstate,$ppincode);
-$stmt->execute();
+$query = "insert into  registration(roomno,seater,feespm,foodstatus,stayfrom,duration,course,regno,firstName,middleName,lastName,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresPincode,pmntAddress,pmntCity,pmntPincode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	$stmt = $mysqli->prepare($query);
+	$rc = $stmt->bind_param('ssssssssssssssssssssssss', $roomno, $seater, $feespm, $foodstatus, $stayfrom, $duration, $course, $regno, $fname, $mname, $lname, $gender, $contactno, $emailid, $emcntno, $gurname, $gurrelation, $gurcntno, $caddress, $ccity, $cpincode, $paddress, $pcity, $ppincode);
+	$stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 }
 ?>
@@ -332,23 +332,7 @@ $aid=$_SESSION['id'];
 </div>
 </div>	
 
-<div class="form-group">
-<label class="col-sm-2 control-label">State </label>
-<div class="col-sm-8">
-<select name="state" id="state"class="form-control" required> 
-<option value="">Select State</option>
-<?php $query ="SELECT * FROM states";
-$stmt2 = $mysqli->prepare($query);
-$stmt2->execute();
-$res=$stmt2->get_result();
-while($row=$res->fetch_object())
-{
-?>
-<option value="<?php echo $row->State;?>"><?php echo $row->State;?></option>
-<?php } ?>
-</select> </div>
-</div>							
-
+<!--  -->
 <div class="form-group">
 <label class="col-sm-2 control-label">Pincode : </label>
 <div class="col-sm-8">
@@ -382,23 +366,7 @@ while($row=$res->fetch_object())
 <input type="text" name="pcity" id="pcity"  class="form-control" required="required">
 </div>
 </div>	
-
-<div class="form-group">
-<label class="col-sm-2 control-label">State </label>
-<div class="col-sm-8">
-<select name="pstate" id="pstate"class="form-control" required> 
-<option value="">Select State</option>
-<?php $query ="SELECT * FROM states";
-$stmt2 = $mysqli->prepare($query);
-$stmt2->execute();
-$res=$stmt2->get_result();
-while($row=$res->fetch_object())
-{
-?>
-<option value="<?php echo $row->State;?>"><?php echo $row->State;?></option>
-<?php } ?>
-</select> </div>
-</div>							
+<!--  -->
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Pincode : </label>
@@ -442,7 +410,7 @@ while($row=$res->fetch_object())
             if($(this).prop("checked") == true){
                 $('#paddress').val( $('#address').val() );
                 $('#pcity').val( $('#city').val() );
-                $('#pstate').val( $('#state').val() );
+                // $('#pstate').val( $('#state').val() );
                 $('#ppincode').val( $('#pincode').val() );
             } 
             
